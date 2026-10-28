@@ -1,6 +1,7 @@
  document.getElementById('confirmBtn').addEventListener('click', function() {
     const nombre = document.getElementById('clientName').value.trim();
     const correo = document.getElementById('clientEmail').value.trim();
+    const notas = document.getElementById('clientNotes').value.trim();
 
     if (!nombre || !correo) {
         alert('Por favor, completa todos los datos del cliente.');
@@ -33,7 +34,7 @@
             <span class="status-badge">PENDIENTE</span>
         </div>
         <p><strong>Correo:</strong> ${correo}</p>
-        <p><strong>Productos:</strong></p>
+        <p><strong>Notas:</strong> ${notas ? notas : 'Sin observaciones'}</p>
         <ul>${listaHTML}</ul>
         <p class="total-text"><strong>Total:</strong> $${total}</p>
         <button class="btn-advance">Avanzar estado</button>
