@@ -40,6 +40,10 @@
         <button class="btn-advance">Avanzar estado</button>
     `;
 
+    ordersList.appendChild(card);
+    document.getElementById('orderForm').reset();
+    document.querySelector('.orders-section').style.display = 'block';
+
     card.querySelector('.btn-advance').addEventListener('click', function() {
         const badge = card.querySelector('.status-badge');
         if (badge.textContent === 'PENDIENTE') {
