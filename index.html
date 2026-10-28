@@ -1,0 +1,31 @@
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<div class="checkout-container">
+    <h3>Registro de clientes de la Joyería</h3>
+    <form id="orderForm">
+        <div class="form-group">
+            <label for="clientName">Nombre del cliente:</label>
+            <input type="text" id="clientName" placeholder="Ej. Juanito Alcachofa" required>
+        </div>
+
+        <div class="form-group">
+            <label for="clientEmail">Correo electrónico:</label>
+            <input type="email" id="clientEmail" placeholder="Ej. juanito.lol03@gmail.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="clientNotes">Notas del pedido:</label>
+            <textarea id="clientNotes" placeholder="Ingrese un comentario o sugerencia para el negocio..."></textarea>
+        </div>
+
+        <button type="button" id="confirmBtn" class="btn-confirm">Registrarse</button>
+        
+    </form>
+</div>
+
+<div class="orders-section" style="display: none;"> 
+    <h2>Cliente registrados</h2>
+    <div id="ordersList" class="orders-grid"></div>
+</div>
+
