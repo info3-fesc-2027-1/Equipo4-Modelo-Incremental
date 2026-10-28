@@ -1,0 +1,24 @@
+{
+  "name": "equipo4-modelo-incremental",
+  "version": "1.0.0",
+  "description": "Proyecto de Informática III.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/info3-fesc-2027-1/Equipo4-Modelo-Incremental.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/info3-fesc-2027-1/Equipo4-Modelo-Incremental/issues"
+  },
+  "homepage": "https://github.com/info3-fesc-2027-1/Equipo4-Modelo-Incremental#readme",
+  "dependencies": {
+    "sqlite3": "^6.0.1"
+  }
+}

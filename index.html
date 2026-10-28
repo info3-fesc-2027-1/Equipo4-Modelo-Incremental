@@ -1,0 +1,22 @@
+<div class="checkout-container">
+    <h3>Finalizar Pedido de Joyería</h3>
+    <form id="orderForm">
+        <div class="form-group">
+            <label for="clientName">Nombre del cliente:</label>
+            <input type="text" id="clientName" placeholder="Ej. Juanito Alcachofa" required>
+        </div>
+
+        <div class="form-group">
+            <label for="clientEmail">Correo electrónico:</label>
+            <input type="email" id="clientEmail" placeholder="Ej. juanito.lol03@gmail.com" required>
+        </div>
+
+        <button type="button" id="confirmBtn" class="btn-confirm">Confirmar pedido</button>
+        <button type="button" id="clearBtn" class="btn-clear">Vaciar pedido</button>
+    </form>
+</div>
+
+<div class="orders-section">
+    <h2>Pedidos registrados</h2>
+    <div id="ordersList" class="orders-grid"></div>
+</div>
