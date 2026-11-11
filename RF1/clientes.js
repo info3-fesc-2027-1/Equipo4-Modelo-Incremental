@@ -13,42 +13,6 @@ const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         alert('Por favor, completa todos los datos del cliente.');
         return;
     }
-
-    const productosSeleccionados = [];
-    document.querySelectorAll('.producto-en-carrito, .item-seleccionado').forEach(item => {
-        const prodNombre = item.querySelector('.nombre-producto').textContent;
-        const prodPrecio = parseFloat(item.querySelector('.precio-producto').textContent.replace('$', ''));
-        productosSeleccionados.push({ nombre: prodNombre, precio: prodPrecio });
-    });
-
-    if (productosSeleccionados.length === 0) {
-        alert('No hay productos seleccionados en el pedido.');
-        return;
-    }
-
-    const total = productosSeleccionados.reduce((acc, item) => acc + item.precio, 0);
-    const ordersList = document.getElementById('ordersList');
-    
-    const card = document.createElement('div');
-    card.classList.add('order-card', 'pending');
-
-    let listaHTML = productosSeleccionados.map(p => `<li>${p.nombre} - $${p.precio}</li>`).join('');
-
-    card.innerHTML = `
-        <div class="card-header">
-            <h4>${nombre}</h4>
-            <span class="status-badge">PENDIENTE</span>
-        </div>
-        <p><strong>Correo:</strong> ${correo}</p>
-        <p><strong>Notas:</strong> ${notas ? notas : 'Sin observaciones'}</p>
-        <ul>${listaHTML}</ul>
-        <p class="total-text"><strong>Total:</strong> $${total}</p>
-        <button class="btn-advance">Avanzar estado</button>
-    `;
-
-    document.querySelector('.orders-section').style.display = 'block';
-
-
     const { data, error } = await _supabase
       .from('clientes')
       .insert([{ 
@@ -63,9 +27,7 @@ const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       return;
     }
 
-    ordersList.appendChild(card);
     document.getElementById('orderForm').reset();
-
-    alert('¡Pedido registrado con éxito!');
+    alert('Cliente registrado con éxito!');
 });
 
