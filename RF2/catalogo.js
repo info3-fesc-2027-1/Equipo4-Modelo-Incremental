@@ -114,3 +114,4 @@ function mostrarProductos(lista) {
     contenedor.innerHTML = "";
 
     lista.forEach(producto 
+                  console.log("Catalogo cargado");
