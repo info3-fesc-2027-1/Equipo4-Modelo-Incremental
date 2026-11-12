@@ -1,27 +1,43 @@
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./RF1/clientes.js" type="module"></script>
+</head>
 
-<div class="checkout-container">
-    <h3>Registro de clientes de la Joyería</h3>
-    <form id="orderForm">
-        <div class="form-group">
-            <label for="clientName">Nombre del cliente:</label>
-            <input type="text" id="clientName" placeholder="Ej. Juanito Alcachofa" required>
+
+<body>
+
+<div class="fixed top-5 right-5 flex items-center gap-2.5 bg-white/90 px-4 py-1.5 rounded-full shadow-md z-50">
+  <img id="user-avatar" src="https://via.placeholder.com/40" alt="Avatar" class="w-10 h-10 rounded-full object-cover">
+  <span id="username-display" class="font-medium text-gray-800">Usuario</span>
+</div>
+
+<div id="orderForm-container" class="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+    <h3 class="text-2xl font-bold text-gray-800 text-center mb-6">Registro de clientes de la Joyería</h3>
+    
+    <form id="orderForm" class="space-y-4">
+        <div>
+            <label for="clientName" class="block text-sm font-medium text-gray-700 mb-1">Nombre del cliente:</label>
+            <input type="text" id="clientName" placeholder="Ej. Juanito Alcachofa" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
         </div>
 
-        <div class="form-group">
-            <label for="clientEmail">Correo electrónico:</label>
-            <input type="email" id="clientEmail" placeholder="Ej. juanito.lol03@gmail.com" required>
+        <div>
+            <label for="clientEmail" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico:</label>
+            <input type="email" id="clientEmail" placeholder="Ej. juanito.lol03@gmail.com" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
         </div>
 
-        <div class="form-group">
-            <label for="clientNotes">Notas del pedido:</label>
-            <textarea id="clientNotes" placeholder="Ingrese un comentario o sugerencia para el negocio..."></textarea>
+        <div>
+            <label for="clientNotes" class="block text-sm font-medium text-gray-700 mb-1">Notas del pedido:</label>
+            <textarea id="clientNotes" placeholder="Ingrese un comentario o sugerencia..."
+                class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none h-24 resize-none"></textarea>
         </div>
 
-        <button type="button" id="confirmBtn" class="btn-confirm">Registrarse</button>
-        
+        <button type="button" id="confirmBtn" 
+            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-4 rounded-xl transition duration-200 shadow-md">
+            Registrarse
+        </button>
     </form>
 </div>
 
@@ -29,4 +45,4 @@
     <h2>Cliente registrados</h2>
     <div id="ordersList" class="orders-grid"></div>
 </div>
-
+</body>

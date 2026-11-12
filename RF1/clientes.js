@@ -4,6 +4,19 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const { createClient } = supabase;
 const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
  
+
+function mostrarPantallaPrincipal(nombreUsuario) {
+    document.getElementById('orderForm-container').style.display = 'none';
+    document.getElementById('username-display').textContent = nombreUsuario;
+    document.getElementById('user-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(nombreUsuario)}&background=random`;
+}
+
+// Al cargar la página, revisa si ya había sesión guardada previamente
+const usuarioGuardado = localStorage.getItem('usuario_posa');
+if (usuarioGuardado) {
+    mostrarPantallaPrincipal(usuarioGuardado);
+}
+
  document.getElementById('confirmBtn').addEventListener('click', async function() {
     const nombre = document.getElementById('clientName').value.trim();
     const correo = document.getElementById('clientEmail').value.trim();
@@ -26,6 +39,10 @@ const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       alert('Hubo un error al guardar en la base de datos.');
       return;
     }
+
+    localStorage.setItem('usuario_posa', nombre);
+    mostrarPantallaPrincipal(nombre);
+
 
     document.getElementById('orderForm').reset();
     alert('Cliente registrado con éxito!');
