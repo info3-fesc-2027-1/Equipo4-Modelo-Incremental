@@ -55,60 +55,61 @@
 </div>
 
 <!-- RF2 - Catálogo de Joyería -->
+<!-- RF2 - Catálogo de Joyería -->
 <div id="catalogo-container" class="w-[95%] mx-auto bg-white p-8 rounded-3xl shadow-xl border border-gray-100 mt-6">
 
     <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">
         Catálogo de Joyería
     </h2>
+
     <input
-    type="text"
-    id="buscarProducto"
-    placeholder="Buscar producto..."
-    class="w-full p-3 border rounded-xl mb-4"
-/>
+        type="text"
+        id="buscarProducto"
+        placeholder="Buscar producto..."
+        class="w-full p-3 border rounded-xl mb-4"
+    />
 
-<div class="flex gap-2 flex-wrap mb-6">
-    <button class="categoria-btn bg-indigo-500 text-white px-4 py-2 rounded-xl" data-cat="Todos">
-        Todos
-    </button>
+    <div class="flex gap-2 flex-wrap mb-6">
 
-    <button class="categoria-btn bg-gray-200 px-4 py-2 rounded-xl" data-cat="Anillos">
-        Anillos
-    </button>
+        <button class="categoria-btn bg-indigo-500 text-white px-4 py-2 rounded-xl" data-cat="Todos">
+            Todos
+        </button>
 
-    <button class="categoria-btn bg-gray-200 px-4 py-2 rounded-xl" data-cat="Collares">
-        Collares
-    </button>
+        <button class="categoria-btn bg-gray-200 px-4 py-2 rounded-xl" data-cat="Anillos">
+            Anillos
+        </button>
 
-    <button class="categoria-btn bg-gray-200 px-4 py-2 rounded-xl" data-cat="Pulseras">
-        Pulseras
-    </button>
+        <button class="categoria-btn bg-gray-200 px-4 py-2 rounded-xl" data-cat="Collares">
+            Collares
+        </button>
 
-    <button class="categoria-btn bg-gray-200 px-4 py-2 rounded-xl" data-cat="Aretes">
-        Aretes
-    </button>
-</div>
+        <button class="categoria-btn bg-gray-200 px-4 py-2 rounded-xl" data-cat="Pulseras">
+            Pulseras
+        </button>
 
-<div id="catalogo-lista"
-     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-</div>
+        <button class="categoria-btn bg-gray-200 px-4 py-2 rounded-xl" data-cat="Aretes">
+            Aretes
+        </button>
 
-<div class="mt-8 bg-gray-100 p-4 rounded-xl">
-
-    <h3 class="text-xl font-bold mb-3">
-        Carrito de Compras
-    </h3>
-
-    <div id="carrito">
     </div>
 
-    <h4 class="font-bold mt-3">
-        Total: $<span id="total">0</span>
-    </h4>
+    <div
+        id="catalogo-lista"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    </div>
 
-</div>
+    <div class="mt-8 bg-gray-100 p-4 rounded-xl">
 
-    <div id="catalogo-lista" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h3 class="text-xl font-bold mb-3">
+            Carrito de Compras
+        </h3>
+
+        <div id="carrito"></div>
+
+        <h4 class="font-bold mt-3">
+            Total: $<span id="total">0</span>
+        </h4>
+
     </div>
 
 </div>
