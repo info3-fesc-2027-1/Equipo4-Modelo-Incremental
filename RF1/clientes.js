@@ -9,13 +9,35 @@ function mostrarPantallaPrincipal(nombreUsuario) {
     document.getElementById('orderForm-container').style.display = 'none';
     document.getElementById('username-display').textContent = nombreUsuario;
     document.getElementById('user-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(nombreUsuario)}&background=random`;
+    document.getElementById('logoutBtn').style.display = 'inline-block';
 }
 
-// Al cargar la página, revisa si ya había sesión guardada previamente
+
+function mostrarPantallaRegistro() {
+    const contenedor = document.getElementById('orderForm-container');
+    if (contenedor) contenedor.style.display = 'block';
+    
+    const displayUser = document.getElementById('username-display');
+    if (displayUser) displayUser.textContent = 'Usuario';
+    
+    const avatar = document.getElementById('user-avatar');
+    if (avatar) avatar.src = 'https://via.placeholder.com/40';
+    
+    const btnLogout = document.getElementById('logoutBtn');
+    if (btnLogout) btnLogout.style.display = 'none';
+}
+
 const usuarioGuardado = localStorage.getItem('usuario_posa');
 if (usuarioGuardado) {
     mostrarPantallaPrincipal(usuarioGuardado);
+} else {
+    mostrarPantallaRegistro();
 }
+
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    localStorage.removeItem('usuario_posa'); 
+    mostrarPantallaRegistro();                
+});
 
  document.getElementById('confirmBtn').addEventListener('click', async function() {
     const nombre = document.getElementById('clientName').value.trim();
