@@ -1,7 +1,11 @@
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+<!-- inicio parte del catalo -->
 <script src="./RF1/clientes.js" type="module"></script>
+<!-- fin parte del catalo -->
+    <script src="./RF2/catalogo.js" type="module"></script>
 </head>
 
 
@@ -46,7 +50,22 @@
         </button>
     </form>
 </div>
+<!-- inicio parte del catalogo -->
+</form>
+</div>
 
+<!-- RF2 - Catálogo de Joyería -->
+<div id="catalogo-container" class="w-full max-w-4xl bg-white p-8 rounded-3xl shadow-xl border border-gray-100 mt-6">
+
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">
+        Catálogo de Joyería
+    </h2>
+
+    <div id="catalogo-lista" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    </div>
+
+</div>
+<!--fin  parte del catalogo -->
 <div class="orders-section" style="display: none;"> 
     <h2>Cliente registrados</h2>
     <div id="ordersList" class="orders-grid"></div>
