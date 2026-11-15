@@ -113,9 +113,39 @@
     </div>
 
 </div>
-<!--fin  parte del catalogo -->
+
 <div class="orders-section" style="display: none;"> 
     <h2>Cliente registrados</h2>
     <div id="ordersList" class="orders-grid"></div>
 </div>
+<section id="seccion-pedidos" style="margin-top: 2rem; padding: 1rem; border: 1px solid #ccc;">
+        <h2>Crear Nuevo Pedido (RF3)</h2>
+        <form id="formCrearPedido">
+            <input type="number" id="pedidoClienteId" placeholder="ID del Cliente" required>
+            <input type="number" id="pedidoProductoId" placeholder="ID de la Joya" required>
+            <input type="number" id="pedidoCantidad" placeholder="Cantidad" value="1" min="1" required>
+            <label for="pedidoFechaCompromiso">Fecha Compromiso:</label>
+            <input type="date" id="pedidoFechaCompromiso" required>
+            <button type="button" id="crearPedidoBtn">Registrar Pedido</button>
+        </form>
+    </section>
+
+   
+    <section id="seccion-estados" style="margin-top: 2rem; padding: 1rem; border: 1px solid #ccc;">
+        <h2>Actualizar Estado del Pedido (RF4)</h2>
+        <form id="formEstadoPedido">
+            <input type="number" id="estadoPedidoId" placeholder="ID del Pedido" required>
+            <select id="nuevoEstadoSelect">
+                <option value="En proceso">En proceso</option>
+                <option value="Entregado">Entregado</option>
+                <option value="Cancelado">Cancelado</option>
+            </select>
+            <input type="text" id="motivoCancelacionInput" placeholder="Motivo (Obligatorio si se cancela)">
+            <button type="button" id="actualizarEstadoBtn">Actualizar Estado</button>
+        </form>
+    </section>
+
+   
+    <script src="RF3/pedido.js"></script>
+    <script src="RF4/estado.js"></script>
 </body>
