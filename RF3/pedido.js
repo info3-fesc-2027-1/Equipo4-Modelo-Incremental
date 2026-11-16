@@ -1,44 +1,92 @@
-const SUPABASE_URL = 'https://yzzkenopjopujyzcwhka.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6emtlbm9wam9wdWp5emN3aGthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyMTQ2MjcsImV4cCI6MjEwODc5MDYyN30.mPDtJsWpLA60CetA90u4jUzSFPIqbwE6cJoF6dEWzeY';
+import { _supabase } from '../src/supabase.js';
+import { obtenerCliente } from '../src/sesion.js';
+import { obtenerCarrito, vaciarCarrito } from '../RF2/catalogo.js';
+import { mostrarToast, confirmar, cerrarModal, validarFormulario, limpiarAlEscribir, activarCarga, fechaLocalHoy, formatearFecha, formatearMoneda, escaparHtml } from '../src/ui.js';
 
-const { createClient } = supabase;
-const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const campoFecha = document.getElementById('pedidoFechaCompromiso');
+const formPedido = document.getElementById('formCrearPedido');
+const panelCarrito = document.getElementById('carritoPanel');
 
-document.getElementById('crearPedidoBtn')?.addEventListener('click', async function() {
-    const idCliente = document.getElementById('pedidoClienteId').value.trim();
-    const idProducto = document.getElementById('pedidoProductoId').value.trim();
-    const cantidad = parseInt(document.getElementById('pedidoCantidad').value) || 1;
-    const fechaCompromiso = document.getElementById('pedidoFechaCompromiso').value;
+campoFecha.min = fechaLocalHoy();
+limpiarAlEscribir(formPedido);
 
-   
-    if (!idCliente || !idProducto || !fechaCompromiso) {
-        alert('Por favor, completa todos los datos del pedido y la fecha compromiso.');
+function actualizarBoton() {
+    document.getElementById('crearPedidoBtn').disabled = obtenerCarrito().length === 0;
+}
+
+document.addEventListener('carrito:cambio', actualizarBoton);
+actualizarBoton();
+
+formPedido.addEventListener('submit', async function(evento) {
+    evento.preventDefault();
+
+    const cliente = obtenerCliente();
+    const carrito = obtenerCarrito();
+    campoFecha.min = fechaLocalHoy();
+
+    if (!cliente) {
+        cerrarModal(panelCarrito);
+        mostrarToast('Regístrate o identifícate con tu correo para crear un pedido.', 'info');
+        document.getElementById('acceso').scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => document.getElementById('clientName').focus({ preventScroll: true }), 500);
         return;
     }
 
-    
-    const hoy = new Date().toISOString().split('T')[0];
-    if (fechaCompromiso < hoy) {
-        alert('Error (RN-06): La fecha compromiso no puede ser anterior al día de hoy.');
+    if (cliente.rol === 'admin') {
+        mostrarToast('La cuenta de administrador no crea pedidos. Inicia sesión como cliente para comprar.', 'info');
         return;
     }
 
-    
-    const { data, error } = await _supabase
-        .from('pedidos')
-        .insert([{
-            id_cliente: idCliente,
-            fecha_entrega: fechaCompromiso,
-            estado_pedido: 'Pendiente'
-        }])
-        .select();
+    if (!carrito.length) {
+        mostrarToast('Agrega al menos una joya al carrito.', 'error');
+        return;
+    }
+
+    const valido = validarFormulario([{
+        campo: campoFecha,
+        validar: valor => {
+            if (!valor) return 'Selecciona la fecha compromiso de entrega.';
+            if (valor < fechaLocalHoy()) return 'La fecha compromiso no puede ser anterior al día de hoy.';
+            return '';
+        }
+    }]);
+    if (!valido) return;
+
+    const fechaCompromiso = campoFecha.value;
+    const total = carrito.reduce((suma, item) => suma + item.producto.precio * item.cantidad, 0);
+    const piezas = carrito.reduce((suma, item) => suma + item.cantidad, 0);
+
+    const aceptado = await confirmar({
+        titulo: 'Confirmar pedido',
+        mensaje: `
+            <span class="block">Cliente: <strong>${escaparHtml(cliente.nombre)}</strong></span>
+            <span class="block">${piezas} ${piezas === 1 ? 'pieza' : 'piezas'} · Total <strong>${formatearMoneda(total)}</strong></span>
+            <span class="block">Entrega comprometida: <strong>${formatearFecha(fechaCompromiso)}</strong></span>`,
+        textoConfirmar: 'Crear pedido'
+    });
+    if (!aceptado) return;
+
+    const boton = document.getElementById('crearPedidoBtn');
+    activarCarga(boton, true, 'Creando pedido...');
+
+    const { data, error } = await _supabase.rpc('crear_pedido', {
+        p_id_cliente: cliente.id,
+        p_fecha_entrega: fechaCompromiso,
+        p_items: carrito.map(item => ({ id_producto: item.producto.id, cantidad: item.cantidad }))
+    });
+
+    activarCarga(boton, false);
 
     if (error) {
         console.error('Error al crear pedido:', error);
-        alert('Hubo un error al guardar el pedido en Supabase.');
+        mostrarToast(error.code === 'P0001' ? error.message : 'Hubo un error al guardar el pedido en Supabase.', 'error');
+        actualizarBoton();
         return;
     }
 
-    alert('¡Pedido creado con éxito en estado Pendiente!');
-    document.getElementById('formCrearPedido').reset();
+    vaciarCarrito();
+    formPedido.reset();
+    cerrarModal(panelCarrito);
+    mostrarToast(`¡Pedido #${data} creado con éxito en estado Pendiente!`, 'exito');
+    document.dispatchEvent(new CustomEvent('pedido:creado', { detail: data }));
 });
