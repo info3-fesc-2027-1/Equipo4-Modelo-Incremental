@@ -22,7 +22,7 @@ const ICONOS = {
 };
 
 export function icono(nombre, clases = 'w-5 h-5') {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="${clases}" aria-hidden="true">${ICONOS[nombre] || ICONOS.joya}</svg>`;
+  return `<svg xmlns="https://www.w3.org/TR/SVG/" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="${clases}" aria-hidden="true">${ICONOS[nombre] || ICONOS.joya}</svg>`;
 }
 
 export function escaparHtml(texto) {
