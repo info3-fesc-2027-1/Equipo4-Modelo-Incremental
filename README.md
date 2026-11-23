@@ -1,5 +1,6 @@
 # Equipo 4 - Modelo Incremental
 
+
 Carranza Vazquez Diego Armando
 Gonzalez Gutierrez Oswaldo
 Martinez Villa Karla Gabriela
@@ -29,3 +30,5 @@ Cada incremento corresponde a un requerimiento funcional:
 * RF2: Catálogo de productos, búsqueda, filtros y carrito de compras.
 * RF3: Creación y registro de pedidos.
 * RF4: Consulta y actualización del estado de los pedidos.
+
+Proyecto de Informática III.
